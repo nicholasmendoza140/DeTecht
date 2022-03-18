@@ -1,31 +1,34 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { borderLeftColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Logo from '../../../assets/detechtlogo.jpeg'
 import CustomInput from '../../components/CustomInput';
 import SignInButton from '../../components/SignInButton';
 import SignUpButton from '../../components/SignUpButton';
+import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
     const[username, setUsername] = useState('');
     const[password, setPassword] = useState('');
+    const[passwordRepeat, setPasswordRepeat] = useState('');
+    
     const navigation = useNavigation();
 
-    const onSignInPress = () => {
-        console.warn("Sign in");
-        // validate
-        navigation.navigate('Home')
-    }
 
     const onSignUpPress = () => {
         console.warn("onSignUpPress")
-        navigation.navigate('SignUp')
+    }
+
+    const onSignInPress = () => {
+        console.warn("onSignInPress")
+        navigation.navigate("SignIn")
     }
 
     return (
         <View style={styles.root}>
-            <Image source={Logo} />
+            <Text style={styles.title}>Create Account</Text>
             <CustomInput 
                 placeholder="Username" 
                 value={username} 
@@ -39,19 +42,30 @@ const SignInScreen = () => {
                 secureTextEntry={true}
                 autoCapitalize={'none'}
             />
-            <SignInButton text ="Sign In" onPress={onSignInPress}/>
-            <SignUpButton text ="Register" onPress={onSignUpPress}/>
+            <CustomInput 
+                placeholder="Confirm Password" 
+                value={passwordRepeat} 
+                setValue={setPasswordRepeat}
+                secureTextEntry={true}
+                autoCapitalize={'none'}
+            />
+            <SignInButton text ="Sign Up" onPress={onSignUpPress}/>
+            <CustomButton text="Have an account? Sign in" onPress={onSignInPress} type="SECONDARY"></CustomButton>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     root: {
-       activeTintColor: 'white', 
        padding: 20,
        alignItems: 'center',
        backgroundColor: 'white',
     },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        margin: 10,
+    }
 });
 
-export default SignInScreen;
+export default SignUpScreen;
