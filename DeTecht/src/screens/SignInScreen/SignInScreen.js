@@ -47,7 +47,7 @@ const SignInScreen = () => {
 
 const styles = StyleSheet.create({
     root: {
-       padding: 20,a
+       padding: 20,
        alignItems: 'center',
        backgroundColor: 'white',
     },
