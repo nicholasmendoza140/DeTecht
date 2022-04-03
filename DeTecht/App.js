@@ -4,6 +4,7 @@ import SignInScreen from './src/screens/SignInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import Navigation from './src/navigation';
 
+
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>

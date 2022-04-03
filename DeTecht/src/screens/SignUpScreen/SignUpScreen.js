@@ -7,6 +7,7 @@ import SignInButton from '../../components/SignInButton';
 import SignUpButton from '../../components/SignUpButton';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native-web';
 
 
 const SignUpScreen = () => {
@@ -19,6 +20,26 @@ const SignUpScreen = () => {
 
     const onSignUpPress = () => {
         console.warn("onSignUpPress")
+        fetch("http://10.117.90.169:3000/", {
+            method: "POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                username : username,
+                password: password,
+            })
+        })
+        .then(res => {
+            res.json()
+        })
+        .then(data =>{
+            Alert.alert('${data.username} is valid!')
+            navigation.navigate("SignIn")
+        }).catch(err => {
+            console.log("error", err)
+        })
+
     }
 
     const onSignInPress = () => {

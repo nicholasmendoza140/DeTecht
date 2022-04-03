@@ -5,6 +5,7 @@ import CustomInput from '../../components/CustomInput';
 import SignInButton from '../../components/SignInButton';
 import SignUpButton from '../../components/SignUpButton';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native-web';
 
 
 const SignInScreen = () => {
@@ -12,10 +13,31 @@ const SignInScreen = () => {
     const[password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    const onSignInPress = () => {
+    const onSignInPress = async () => {
         console.warn("Sign in");
-        // validate
-        navigation.navigate('Home')
+        fetch("http://10.117.90.169:3000/signin", {
+            method: "POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                username : username,
+                password: password,
+            })
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                navigation.navigate('Home')
+                console.log(response.status)
+            } 
+            else {
+                console.log(response.status)
+                alert("Invalid login")
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const onSignUpPress = () => {
