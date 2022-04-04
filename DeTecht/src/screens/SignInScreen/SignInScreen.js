@@ -15,7 +15,7 @@ const SignInScreen = () => {
 
     const onSignInPress = async () => {
         console.warn("Sign in");
-        fetch("http://10.117.90.169:3000/signin", {
+        fetch("http://10.250.15.176:3000/signin", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -27,7 +27,7 @@ const SignInScreen = () => {
         })
         .then((response) => {
             if (response.status == 200) {
-                navigation.navigate('Home')
+                navigation.navigate('Home', {username:username})
                 console.log(response.status)
             } 
             else {
