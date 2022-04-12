@@ -27,7 +27,7 @@ const HomeScreen = (props) => {
         <SafeAreaView style={styles.root}>
             <AppBar onPress={onProfilePress} />
             <Text style={{alignSelf:'center'}}>Hello {props.route.params.username}</Text>
-            <CustomButton text="Logout" onPress={onLogOutPress}></CustomButton>
+            <CustomButton text="Logout" type ="SECONDARY" onPress={onLogOutPress}></CustomButton>
         </SafeAreaView>
     )
 }
