@@ -3,8 +3,12 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../../components/CustomButton';
 import CustomInput from '../../components/CustomInput';
+import { Alert } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
 const VaccUploadScreen = (props) => {
+    const navigation = useNavigation();
+
     const username = props.route.params.username
     const[firstName, setFirstName] = useState('');
     const[lastName, setLastName] = useState('');
@@ -14,11 +18,38 @@ const VaccUploadScreen = (props) => {
     const[date2, setDate2] = useState('');
 
     const onSubmitPress = (props) => {
+        console.warn("onSubmitPress")
+        fetch("http://10.250.15.176:3000/uploadvacc", {
+            method: "POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                username : username,
+                firstName : firstName,
+                lastName : lastName,
+                date1 : date1,
+                vacc1 : vacc1,
+                date2 : date2,
+                vacc2 : vacc2,
+            })
+        })
+        .then(res => {
+            res.text()
+        })
+        .then(data =>{
+            Alert.alert('Vaccine uploaded!' + data)
+            navigation.navigate("Profile", {username: username})
+            alert("Vaccine Info Uploaded!")
+        }).catch(err => {
+            console.log("error", err)
+        })
 
     }
     
     return (
         <SafeAreaView style={styles.root}>
+            <Text>{username}</Text>
             <Text style={styles.title}>Upload Vaccine Record</Text>
             <Text style={{fontSize:18, fontWeight: 'bold', padding: 5}}>Name</Text>
             <CustomInput 
@@ -35,7 +66,6 @@ const VaccUploadScreen = (props) => {
             />
             <Text style={{fontSize:18, fontWeight: 'bold', padding: 5}}>1st Dose</Text>
             <CustomInput
-                type="date"
                 placeholder="mm/dd/yy" 
                 value={date1}
                 setValue={setDate1}
@@ -49,7 +79,6 @@ const VaccUploadScreen = (props) => {
             />
             <Text style={{fontSize:18, fontWeight: 'bold', padding: 5}}>2nd Dose</Text>
             <CustomInput
-                type="date"
                 placeholder="mm/dd/yy" 
                 value={date2}
                 setValue={setDate2}

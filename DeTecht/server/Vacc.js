@@ -14,7 +14,7 @@ const VaccSchema = new mongoose.Schema({
         required: true,
     },
     Date1: {
-        type: Date,
+        type: String,
         required: true,
     },
     Vacc1: {
@@ -22,7 +22,7 @@ const VaccSchema = new mongoose.Schema({
         required: true,
     },
     Date2: {
-        type: Date,
+        type: String,
         required: true,
     },
     Vacc2: {
