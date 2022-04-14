@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 require("./User");
 require("./Event");
+require("./Vacc");
 
 const Event = mongoose.model("event")
 const User = mongoose.model("user")
+const Vacc = mongoose.model("vacc")
 
 app.use(bodyParser.json())
 
@@ -94,6 +96,29 @@ app.post('/createevent',(req,res) => {
   }).catch(err => {
       console.log(err)
   })
+app.post('/uploadvacc', (req,res) => {
+    const {username,firstName,lastName,date1,vacc1,date2,vacc2} = req.body
+    if(!firstName || !lastName || !date1 || !vacc1 || !date2 || !vacc2) {
+        return res.status(422).send({error:"Must complete all fields"})
+    }
+    const vaccCard = new Vacc({
+      username: username,
+      FirstName: firstName,
+      LastName: lastName,
+      Date1: date1,
+      Vacc1: vacc1,
+      Date2: date2,
+      Vacc2: vacc2,
+    })
+    vaccCard.save()
+    console.log("Vacc Card Uploaded")
+    .then(data =>{
+        console.log(data)
+        res.send(data)
+    }).catch(err => {
+        console.log(err)
+    })
+
 })
 
 app.listen(3000, () => {

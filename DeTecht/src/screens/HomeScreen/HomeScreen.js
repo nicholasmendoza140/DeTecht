@@ -34,6 +34,7 @@ const HomeScreen = (props) => {
             <Text style={{alignSelf:'center'}}>Hello {props.route.params.username}</Text>
             <CustomButton text="Logout" onPress={onLogOutPress}></CustomButton>
             <CustomButton text="Create Event" onPress={onCreateEventPress}></CustomButton>
+            <CustomButton text="Logout" type ="SECONDARY" onPress={onLogOutPress}></CustomButton>
         </SafeAreaView>
     )
 }
