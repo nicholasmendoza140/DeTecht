@@ -15,7 +15,7 @@ const SignInScreen = () => {
 
     const onSignInPress = async () => {
         console.warn("Sign in");
-        fetch("http://10.251.150.101:3000/signin", {
+        fetch("http://10.250.144.231:3000/signin", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'

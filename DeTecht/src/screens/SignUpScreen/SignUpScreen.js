@@ -20,7 +20,7 @@ const SignUpScreen = () => {
 
     const onSignUpPress = () => {
         console.warn("onSignUpPress")
-        fetch("http://10.250.15.176:3000/", {
+        fetch("http://10.250.144.231:3000/", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'

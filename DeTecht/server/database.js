@@ -4,8 +4,10 @@ const app = express();
 var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 require("./User");
+require("./Event");
 require("./Vacc");
 
+const Event = mongoose.model("event")
 const User = mongoose.model("user")
 const Vacc = mongoose.model("vacc")
 
@@ -76,6 +78,23 @@ app.post('/signin',async (req,res) => {
     
 })
 
+app.post('/createevent',(req,res) => {
+  const {eventName, description} = req.body
+  if(!eventName || !description) {
+      return res.status(422).send({error:"Must complete all fields"})
+  }
+  const event = new Event({
+    eventName: eventName,
+    description: description,
+  })
+  event.save()
+  console.log("Event Created")
+  .then(data =>{
+      console.log(data)
+      res.send(data)
+  }).catch(err => {
+      console.log(err)
+  })
 app.post('/uploadvacc', (req,res) => {
     const {username,firstName,lastName,date1,vacc1,date2,vacc2} = req.body
     if(!firstName || !lastName || !date1 || !vacc1 || !date2 || !vacc2) {
@@ -121,4 +140,3 @@ app.post('/checkvacc', async (req,res) => {
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 })
-

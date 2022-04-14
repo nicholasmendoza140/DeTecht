@@ -7,6 +7,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import HomeScreen from '../screens/HomeScreen';
 import AppBar from '../components/AppBar';
 import ProfileScreen from '../screens/ProfileScreen';
+import CreateEventScreen from '../screens/CreateEventScreen/CreateEventScreen';
 import VaccUploadScreen from '../screens/VaccUploadScreen/VaccUploadScreen';
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ const Navigation = () => {
                     component={HomeScreen} 
                 />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
+                <Stack.Screen name="CreateEvent" component={CreateEventScreen} />
                 <Stack.Screen name="VaccUpload" component={VaccUploadScreen} />
 
             </Stack.Navigator>
@@ -41,7 +43,6 @@ const Theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: 'white',
     }
 }
 
