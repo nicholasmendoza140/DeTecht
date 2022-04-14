@@ -29,7 +29,8 @@ const VaccSchema = new mongoose.Schema({
         type: String,
         required: true,
     }
-})
+}
+)
 
 
 mongoose.model("vacc", VaccSchema)
