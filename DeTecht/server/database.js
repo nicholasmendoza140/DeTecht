@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
@@ -100,6 +99,23 @@ app.post('/uploadvacc', (req,res) => {
         console.log(err)
     })
 
+})
+
+app.post('/checkvacc', async (req,res) => {
+    const username = req.body.username
+    const vacc = await Vacc.findOne({username})
+    try {
+      if (vacc)
+      {
+        res.json(vacc)
+        console.log("Found")
+      }
+      else{
+        
+      }
+    }catch(err) {
+      console.log(err)
+    }
 })
 
 app.listen(3000, () => {
