@@ -5,7 +5,9 @@ const app = express();
 var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt')
 require("./User");
+require("./Event");
 
+const Event = mongoose.model("event")
 const User = mongoose.model("user")
 
 app.use(bodyParser.json())
@@ -73,6 +75,25 @@ app.post('/signin',async (req,res) => {
       }
       */
     
+})
+
+app.post('/createevent',(req,res) => {
+  const {eventName, description} = req.body
+  if(!eventName || !description) {
+      return res.status(422).send({error:"Must complete all fields"})
+  }
+  const event = new Event({
+    eventName: eventName,
+    description: description,
+  })
+  event.save()
+  console.log("Event Created")
+  .then(data =>{
+      console.log(data)
+      res.send(data)
+  }).catch(err => {
+      console.log(err)
+  })
 })
 
 app.listen(3000, () => {

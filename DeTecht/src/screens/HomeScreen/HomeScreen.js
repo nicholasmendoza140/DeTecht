@@ -22,12 +22,18 @@ const HomeScreen = (props) => {
         navigation.navigate('Profile', {username:username})
     }
 
+    const onCreateEventPress = () => {
+        console.warn("onCreateEventPress")
+        navigation.navigate('CreateEvent', {username:username})
+    }
+
 
     return (
         <SafeAreaView style={styles.root}>
             <AppBar onPress={onProfilePress} />
             <Text style={{alignSelf:'center'}}>Hello {props.route.params.username}</Text>
             <CustomButton text="Logout" onPress={onLogOutPress}></CustomButton>
+            <CustomButton text="Create Event" onPress={onCreateEventPress}></CustomButton>
         </SafeAreaView>
     )
 }

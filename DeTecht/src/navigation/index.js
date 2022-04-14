@@ -7,6 +7,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import HomeScreen from '../screens/HomeScreen';
 import AppBar from '../components/AppBar';
 import ProfileScreen from '../screens/ProfileScreen';
+import CreateEventScreen from '../screens/CreateEventScreen/CreateEventScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +30,7 @@ const Navigation = () => {
                     component={HomeScreen} 
                 />
                 <Stack.Screen name="Profile" component={ProfileScreen} />
-
+                <Stack.Screen name="CreateEvent" component={CreateEventScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -39,7 +40,6 @@ const Theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: 'white',
     }
 }
 
