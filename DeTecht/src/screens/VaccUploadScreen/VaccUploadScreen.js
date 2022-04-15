@@ -19,7 +19,7 @@ const VaccUploadScreen = (props) => {
 
     const onSubmitPress = (props) => {
         console.warn("onSubmitPress")
-        fetch("http://10.250.15.176:3000/uploadvacc", {
+        fetch("http://10.251.150.101:3000/uploadvacc", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'

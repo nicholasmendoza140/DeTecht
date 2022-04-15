@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
 require("./User");
 require("./Event");
 require("./Vacc");
@@ -11,7 +10,7 @@ const Event = mongoose.model("event")
 const User = mongoose.model("user")
 const Vacc = mongoose.model("vacc")
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 const mongoUri = 'mongodb+srv://admin:admin@cluster0.jbcb7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 mongoose.connect(mongoUri, {
@@ -76,7 +75,7 @@ app.post('/signin',async (req,res) => {
       }
       */
     
-})
+});
 
 app.post('/createevent',(req,res) => {
   const {eventName, description} = req.body
@@ -95,6 +94,8 @@ app.post('/createevent',(req,res) => {
   }).catch(err => {
       console.log(err)
   })
+});
+
 app.post('/uploadvacc', (req,res) => {
     const {username,firstName,lastName,date1,vacc1,date2,vacc2} = req.body
     if(!firstName || !lastName || !date1 || !vacc1 || !date2 || !vacc2) {
@@ -118,7 +119,7 @@ app.post('/uploadvacc', (req,res) => {
         console.log(err)
     })
 
-})
+});
 
 app.post('/checkvacc', async (req,res) => {
     const username = req.body.username
@@ -135,8 +136,8 @@ app.post('/checkvacc', async (req,res) => {
     }catch(err) {
       console.log(err)
     }
-})
+});
 
-app.listen(3000, () => {
+app.listen(3000, () => { 
   console.log('Listening on port 3000');
 })
