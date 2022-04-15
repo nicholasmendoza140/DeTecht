@@ -20,7 +20,7 @@ const SignUpScreen = () => {
 
     const onSignUpPress = () => {
         console.warn("onSignUpPress")
-        fetch("http://10.250.144.231:3000/", {
+        fetch("http://10.251.150.101:3000/", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -71,7 +71,7 @@ const SignUpScreen = () => {
                 autoCapitalize={'none'}
             />
             <SignInButton text ="Sign Up" onPress={onSignUpPress}/>
-            <CustomButton text="Have an account? Sign in" onPress={onSignInPress} type="SECONDARY"></CustomButton>
+            <CustomButton text="Have an account? Sign in" disabled={false} onPress={onSignInPress} type="SECONDARY"></CustomButton>
         </View>
     )
 }

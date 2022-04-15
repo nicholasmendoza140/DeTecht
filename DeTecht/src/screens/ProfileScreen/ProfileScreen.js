@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { SafeAreaView, Text, StyleSheet, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { SafeAreaView, Text, StyleSheet, Image, Pressable } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,10 +8,13 @@ const ProfileScreen = (props) => {
     const navigation = useNavigation();
 
     const onVaccPress = () => {
+        console.log("onVaccPress")
         navigation.navigate('VaccUpload', {username:username})
     }
 
-    const [state, setState] = useState("")
+    const [state, setState] = useState("PRIMARY")
+    const [disabledState, setDisabledState] = useState(false)
+    const [buttonText, setButtonText] = useState("Add Vaccine Record")
     console.log(state) 
 
     const checkVaccStatus = () => {
@@ -28,20 +31,31 @@ const ProfileScreen = (props) => {
             if (res.ok )
             {
                 setState("Found")
-                console.log(res.json())      
+                setDisabledState(true)
+                setButtonText("Vaccine Uploaded")
+                console.log(res.json()) 
+                return true
             }    
             else 
-                setState("NotFound")                                                  
+                setState("PRIMARY")    
+                setDisabledState(false)  
+                return false                                        
         }).catch(err => {
             console.log("error", err)
         })
     }
-    checkVaccStatus();
+
+    useEffect(() => {
+        checkVaccStatus();
+        if (checkVaccStatus() == true)
+            setDisabledState(true)
+    }, [])
+    
 
     return (
         <SafeAreaView>
             <Text style={styles.name} >{username}</Text>
-            <CustomButton style={{alignSelf: 'center'}} text="Add Vaccine Record" type="PRIMARY" onPress={onVaccPress}></CustomButton>
+            <CustomButton style={{alignSelf: 'center'}} text={buttonText} type={state} disabled={disabledState} onPress={onVaccPress}></CustomButton>
         </SafeAreaView>
     )
 }

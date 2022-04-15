@@ -43,6 +43,7 @@ const Theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
+        background: 'white'
     }
 }
 

@@ -38,7 +38,7 @@ const CreateEventScreen = (props) => {
     
     const onCreateEventPress = () => {
         console.warn("onCreateEventPress")
-        fetch("http://10.250.144.231:3000/createevent", {
+        fetch("http://10.251.150.101:3000/createevent", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -91,7 +91,7 @@ const CreateEventScreen = (props) => {
                 setValue={setDescription}
                 autoCapitalize={'none'}
             />
-            <CustomButton onPress={onCreateEventPress} text="Create Event" />
+            <CustomButton onPress={onCreateEventPress} disabled={false} text="Create Event" />
         </View>
     )
 }

@@ -32,9 +32,8 @@ const HomeScreen = (props) => {
         <SafeAreaView style={styles.root}>
             <AppBar onPress={onProfilePress} />
             <Text style={{alignSelf:'center'}}>Hello {props.route.params.username}</Text>
-            <CustomButton text="Logout" onPress={onLogOutPress}></CustomButton>
-            <CustomButton text="Create Event" onPress={onCreateEventPress}></CustomButton>
-            <CustomButton text="Logout" type ="SECONDARY" onPress={onLogOutPress}></CustomButton>
+            <CustomButton text="Create Event" disabled={false} onPress={onCreateEventPress}></CustomButton>
+            <CustomButton text="Logout" type ="SECONDARY" disabled={false} onPress={onLogOutPress}></CustomButton>
         </SafeAreaView>
     )
 }
