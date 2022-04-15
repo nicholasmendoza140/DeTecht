@@ -17,13 +17,15 @@ const CreateEventScreen = (props) => {
     const username = props.route.params.username
     
     const navigation = useNavigation();
+    console.log(date)
 
-    const onChange = (selectedDate) => {
+    const onChange = (event, selectedDate) => {
         setShow(true);
-        setDate(selectedDate);
+        console.log(selectedDate)
+        setDate(selectedDate)
     };
     
-    const showMode = (currentMode) => {
+    const showMode = currentMode => {
         setShow(true);
         setMode(currentMode);
     };
@@ -76,6 +78,7 @@ const CreateEventScreen = (props) => {
             </View>
             {show && (
                 <DateTimePicker
+                    style={{width: '25%', alignSelf: 'center'}}
                     testID="dateTimePicker"
                     value={date}
                     display="default"
