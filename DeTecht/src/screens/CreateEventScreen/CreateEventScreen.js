@@ -46,6 +46,7 @@ const CreateEventScreen = (props) => {
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
+                owner: username,
                 eventName: eventName,
                 description: description,
             })
@@ -54,9 +55,9 @@ const CreateEventScreen = (props) => {
             res.text()
         })
         .then(data =>{
-            Alert.alert('${data.eventName} is valid!')
-            Alert.alert('${data.description} is valid!')
-            navigation.navigate("Home", {username:username})
+            Alert.alert("Event Created!")
+            console.log(data);
+            navigation.navigate("Home", {username: username})
         }).catch(err => {
             console.log("error", err)
         })

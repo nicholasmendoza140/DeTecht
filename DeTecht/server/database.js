@@ -78,11 +78,12 @@ app.post('/signin',async (req,res) => {
 });
 
 app.post('/createevent',(req,res) => {
-  const {eventName, description} = req.body
+  const {owner, eventName, description} = req.body
   if(!eventName || !description) {
       return res.status(422).send({error:"Must complete all fields"})
   }
   const event = new Event({
+    owner: owner,
     eventName: eventName,
     description: description,
   })
@@ -131,12 +132,23 @@ app.post('/checkvacc', async (req,res) => {
         console.log("Found")
       }
       else{
-        
+  
       }
     }catch(err) {
       console.log(err)
     }
 });
+
+app.post('/events', (req,res) => {
+    const owner = req.body.owner
+    Event.find({owner})
+      .then(events => {
+        res.json(events)
+        console.log(events)
+      }).catch(err => {
+        console.log(err)
+      })
+})
 
 app.listen(3000, () => { 
   console.log('Listening on port 3000');
