@@ -78,7 +78,7 @@ app.post('/signin',async (req,res) => {
 });
 
 app.post('/createevent',(req,res) => {
-  const {owner, eventName, description} = req.body
+  const {owner, eventName, description, invited} = req.body
   if(!eventName || !description) {
       return res.status(422).send({error:"Must complete all fields"})
   }
@@ -86,15 +86,16 @@ app.post('/createevent',(req,res) => {
     owner: owner,
     eventName: eventName,
     description: description,
+    invited: invited,
   })
   event.save()
-  console.log("Event Created")
   .then(data =>{
       console.log(data)
       res.send(data)
   }).catch(err => {
       console.log(err)
   })
+  console.log("Event Created")
 });
 
 app.post('/uploadvacc', (req,res) => {
@@ -142,6 +143,17 @@ app.post('/checkvacc', async (req,res) => {
 app.post('/events', (req,res) => {
     const owner = req.body.owner
     Event.find({owner})
+      .then(events => {
+        res.json(events)
+        console.log(events)
+      }).catch(err => {
+        console.log(err)
+      })
+})
+
+app.post('/invites', (req,res) => {
+    const username = req.body.username
+    Event.find({invited: {$all: [username]}})
       .then(events => {
         res.json(events)
         console.log(events)
