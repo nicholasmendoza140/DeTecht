@@ -11,6 +11,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 const CreateEventScreen = (props) => {
     const [eventName, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [invitees, setInvitees] = useState('');
     const [date, setDate] = useState(new Date(Date.now()));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
@@ -39,6 +40,7 @@ const CreateEventScreen = (props) => {
     };
     
     const onCreateEventPress = () => {
+        var inviteArray = invitees.split(",");
         console.warn("onCreateEventPress")
         fetch("http://10.251.150.101:3000/createevent", {
             method: "POST",
@@ -49,6 +51,7 @@ const CreateEventScreen = (props) => {
                 owner: username,
                 eventName: eventName,
                 description: description,
+                invited: inviteArray,
             })
         })
         .then(res => {
@@ -93,6 +96,12 @@ const CreateEventScreen = (props) => {
                 placeholder="Event Description" 
                 value={description} 
                 setValue={setDescription}
+                autoCapitalize={'none'}
+            />
+            <CustomInput 
+                placeholder="Invite Guests (e.g guest1,guest2)" 
+                value={invitees} 
+                setValue={setInvitees}
                 autoCapitalize={'none'}
             />
             <CustomButton onPress={onCreateEventPress} disabled={false} text="Create Event" />

@@ -12,7 +12,10 @@ const EventSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-    }
+    },
+    invited: [{
+        type: String
+    }]
 })
 
 
