@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import { SafeAreaView, Text, StyleSheet, Image, View, ScrollView } from 'react-native';
+import React, {useState, useEffect, Component} from 'react';
+import { SafeAreaView, Text, StyleSheet, Image, View, ScrollView, } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton';
 import { Appbar } from 'react-native-paper'
+import RsvpButton from '../../components/RsvpButton';
 import AppBar from '../../components/AppBar';
 
 
 const HomeScreen = (props) => {
     const username = props.route.params.username
     const navigation = useNavigation();
+    const [vaccState, setvaccState] = useState(false)
     const [events, setEvents] = useState([{
         owner: '',
         eventName: '',
@@ -35,8 +37,61 @@ const HomeScreen = (props) => {
         .then(jsonRes => setEvents(jsonRes))
     }
 
+    const checkVaccStatus = () => {
+        fetch("http://10.251.150.101:3000/checkvacc", {
+            method: "POST",
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                username : username
+            })
+        })
+        .then(res => {
+            if (res.ok )
+            {
+                setvaccState(true)
+                console.log(res.json()) 
+                return true
+            }    
+            else {
+                setvaccState(false)
+                return false    
+            }                                    
+        }).catch(err => {
+            console.log("error", err)
+        })
+    }
+
+    const onRsvpPress = (eventID) => {
+        if (vaccState == false) {
+            alert("Must be vaccinated!")
+        }
+        else {
+        fetch("http://10.251.150.101:3000/rsvp", {
+        method: "POST",
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify({
+            _id : eventID,
+            username : username
+        })
+        }) 
+        .then(res => {
+            res.text()
+            alert("RSVP'd!")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    }
+
     useEffect(() => {
         checkMyInvites();
+        checkVaccStatus()
+        console.log()
         console.log(events)
     }, [])
 
@@ -68,10 +123,11 @@ const HomeScreen = (props) => {
             <View style={{padding: 15}}>
             {events.map((event, index) => {
                 return(
-                    <View key={index} style={styles.eventContainer}>
+                    <View key={index} event={event} style={styles.eventContainer}>
                         <Text style={styles.eventName}>{event.eventName}</Text>
                         <Text>{event.description}</Text>
                         <Text>Hosted by {event.owner}</Text>
+                        <RsvpButton text="RSVP" onPress={() => onRsvpPress(event._id)}></RsvpButton>
                     </View> 
                 )
             })}
@@ -101,7 +157,7 @@ const styles = StyleSheet.create({
     eventName: {
         fontWeight: 'bold',
         fontSize: 16
-    }
+    },
 });
 
 export default HomeScreen;
