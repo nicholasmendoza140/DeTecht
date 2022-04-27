@@ -15,6 +15,10 @@ const EventSchema = new mongoose.Schema({
     },
     invited: [{
         type: String
+    }],
+    attending: [{
+        type: String,
+        unique: true,
     }]
 })
 

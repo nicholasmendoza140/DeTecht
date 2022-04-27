@@ -162,6 +162,18 @@ app.post('/invites', (req,res) => {
       })
 })
 
+app.post('/rsvp', (req,res) => {
+    const {_id, username} = req.body
+    const event = Event.findOne({_id: {$eq : _id}})
+    event.updateOne({$addToSet: {attending: username }})
+    .then(event => {
+        res.json(event)
+        console.log("Updated" + event)
+    }).catch(err => {
+        console.log(err)
+    })
+})
+
 app.listen(3000, () => { 
   console.log('Listening on port 3000');
 })

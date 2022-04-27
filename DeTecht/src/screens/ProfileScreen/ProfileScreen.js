@@ -86,9 +86,9 @@ const ProfileScreen = (props) => {
             <CustomButton style={{alignSelf: 'center'}} text={buttonText} type={state} disabled={disabledState} onPress={onVaccPress}></CustomButton>
             <Text style={styles.header1}>My Events</Text> 
             <View style={{padding: 15}}>
-            {events.map((event) => {
+            {events.map((event, index) => {
                 return(
-                    <View style={styles.eventContainer}>
+                    <View key={index} style={styles.eventContainer}>
                         <Text style={styles.eventName}>{event.eventName}</Text>
                         <Text>{event.description}</Text>
                     </View> 
