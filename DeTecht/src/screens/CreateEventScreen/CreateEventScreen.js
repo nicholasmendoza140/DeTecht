@@ -49,6 +49,7 @@ const CreateEventScreen = (props) => {
             },
             body:JSON.stringify({
                 owner: username,
+                Date: date,
                 eventName: eventName,
                 description: description,
                 invited: inviteArray,

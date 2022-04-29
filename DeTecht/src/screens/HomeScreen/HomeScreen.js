@@ -6,6 +6,7 @@ import CustomButton from '../../components/CustomButton';
 import { Appbar } from 'react-native-paper'
 import RsvpButton from '../../components/RsvpButton';
 import AppBar from '../../components/AppBar';
+import moment from 'moment';
 
 
 const HomeScreen = (props) => {
@@ -15,6 +16,7 @@ const HomeScreen = (props) => {
     const [events, setEvents] = useState([{
         owner: '',
         eventName: '',
+        Date: '',
         description: '',
     }])
 
@@ -125,8 +127,9 @@ const HomeScreen = (props) => {
                 return(
                     <View key={index} event={event} style={styles.eventContainer}>
                         <Text style={styles.eventName}>{event.eventName}</Text>
+                        <Text style={{marginBottom: 5}}>{moment(event.Date).format("LLL")}</Text>
                         <Text>{event.description}</Text>
-                        <Text>Hosted by {event.owner}</Text>
+                        <Text style={{marginVertical: 5}}>Hosted by {event.owner}</Text>
                         <RsvpButton text="RSVP" onPress={() => onRsvpPress(event._id)}></RsvpButton>
                     </View> 
                 )

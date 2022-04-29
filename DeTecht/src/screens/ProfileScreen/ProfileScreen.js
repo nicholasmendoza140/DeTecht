@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { SafeAreaView, Text, StyleSheet, Image, Pressable, View } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 
 const ProfileScreen = (props) => {
     const username = props.route.params.username
@@ -10,6 +11,7 @@ const ProfileScreen = (props) => {
     const [events, setEvents] = useState([{
         owner: '',
         eventName: '',
+        Date: '',
         description: '',
     }])
 
@@ -90,6 +92,7 @@ const ProfileScreen = (props) => {
                 return(
                     <View key={index} style={styles.eventContainer}>
                         <Text style={styles.eventName}>{event.eventName}</Text>
+                        <Text style={{marginBottom: 5}}>{moment(event.Date).format('LLL')}</Text>
                         <Text>{event.description}</Text>
                     </View> 
                 )

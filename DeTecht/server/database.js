@@ -78,13 +78,14 @@ app.post('/signin',async (req,res) => {
 });
 
 app.post('/createevent',(req,res) => {
-  const {owner, eventName, description, invited} = req.body
+  const {owner, eventName, Date, description, invited} = req.body
   if(!eventName || !description) {
       return res.status(422).send({error:"Must complete all fields"})
   }
   const event = new Event({
     owner: owner,
     eventName: eventName,
+    Date: Date,
     description: description,
     invited: invited,
   })
