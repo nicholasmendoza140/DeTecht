@@ -21,7 +21,6 @@ const EventSchema = new mongoose.Schema({
     }],
     attending: [{
         type: String,
-        unique: true,
     }]
 })
 

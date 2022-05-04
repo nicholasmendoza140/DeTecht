@@ -175,6 +175,23 @@ app.post('/rsvp', (req,res) => {
     })
 })
 
+app.post('/guests', (req,res) => {
+    const {eventName} = req.body
+    Event.findOne({eventName})
+    .then(event => {
+        res.json(event)
+        console.log(event)
+    }).catch(err => {
+        console.log(err)
+    })
+      /* .then(event => {
+        res.json(event)
+        console.log(event)
+      }).catch(err => {
+        console.log(err)
+    }) */
+})
+
 app.listen(3000, () => { 
   console.log('Listening on port 3000');
 })

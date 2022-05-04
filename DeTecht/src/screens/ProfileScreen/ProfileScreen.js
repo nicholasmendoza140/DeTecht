@@ -3,6 +3,7 @@ import { SafeAreaView, Text, StyleSheet, Image, Pressable, View } from 'react-na
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
+import RsvpButton from '../../components/RsvpButton';
 
 const ProfileScreen = (props) => {
     const username = props.route.params.username
@@ -43,6 +44,10 @@ const ProfileScreen = (props) => {
             }
             })
         .then(jsonRes => setEvents(jsonRes))
+    }
+
+    const onGuestPress = (eventName) => {
+        navigation.navigate('GuestList', {eventName:eventName})
     }
 
     const checkVaccStatus = () => {
@@ -94,6 +99,7 @@ const ProfileScreen = (props) => {
                         <Text style={styles.eventName}>{event.eventName}</Text>
                         <Text style={{marginBottom: 5}}>{moment(event.Date).format('LLL')}</Text>
                         <Text>{event.description}</Text>
+                        <RsvpButton text="Guest List" onPress={() => onGuestPress(event.eventName)}></RsvpButton>
                     </View> 
                 )
             })}
