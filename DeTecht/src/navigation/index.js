@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import CreateEventScreen from '../screens/CreateEventScreen/CreateEventScreen';
 import VaccUploadScreen from '../screens/VaccUploadScreen/VaccUploadScreen';
 import GuestListScreen from '../screens/GuestListScreen/GuestListScreen';
+import ChartScreen from '../screens/ChartScreen/ChartScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ const Navigation = () => {
                 <Stack.Screen name="CreateEvent" component={CreateEventScreen} />
                 <Stack.Screen name="VaccUpload" component={VaccUploadScreen} />
                 <Stack.Screen name="GuestList" component={GuestListScreen} />
+                <Stack.Screen name="ChartScreen" component={ChartScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>

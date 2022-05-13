@@ -126,11 +126,12 @@ app.post('/uploadvacc', (req,res) => {
 
 app.post('/checkvacc', async (req,res) => {
     const username = req.body.username
-    const vacc = await Vacc.findOne({username})
+    const vacc = await Vacc.findOne({username: {$eq: username}})
     try {
       if (vacc)
       {
         res.json(vacc)
+        console.log(vacc)
         console.log("Found")
       }
       else{

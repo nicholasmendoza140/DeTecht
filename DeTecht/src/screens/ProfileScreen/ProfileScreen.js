@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { SafeAreaView, Text, StyleSheet, Image, Pressable, View } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, Image, Pressable, View, ScrollView } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
@@ -28,7 +28,7 @@ const ProfileScreen = (props) => {
     console.log(state) 
 
     const checkMyEvents = () => {
-        fetch("http://10.251.150.101:3000/events", {
+        fetch("http://10.0.0.185:3000/events", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -51,7 +51,7 @@ const ProfileScreen = (props) => {
     }
 
     const checkVaccStatus = () => {
-        fetch("http://10.251.150.101:3000/checkvacc", {
+        fetch("http://10.0.0.185:3000/checkvacc", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -83,12 +83,14 @@ const ProfileScreen = (props) => {
         if (checkVaccStatus() == true)
             setDisabledState(true)
         checkMyEvents();
+        console.log(disabledState)
         console.log(events)
     }, [])
     
 
     return (
         <SafeAreaView>
+        <ScrollView>
             <Text style={styles.name} >{username}</Text>
             <CustomButton style={{alignSelf: 'center'}} text={buttonText} type={state} disabled={disabledState} onPress={onVaccPress}></CustomButton>
             <Text style={styles.header1}>My Events</Text> 
@@ -104,6 +106,7 @@ const ProfileScreen = (props) => {
                 )
             })}
             </View>
+        </ScrollView>
         </SafeAreaView>
     )
 

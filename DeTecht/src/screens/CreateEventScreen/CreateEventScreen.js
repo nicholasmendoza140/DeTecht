@@ -42,7 +42,7 @@ const CreateEventScreen = (props) => {
     const onCreateEventPress = () => {
         var inviteArray = invitees.split(",");
         console.warn("onCreateEventPress")
-        fetch("http://10.251.150.101:3000/createevent", {
+        fetch("http://10.0.0.185:3000/createevent", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'

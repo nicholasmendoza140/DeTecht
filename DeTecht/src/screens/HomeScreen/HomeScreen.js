@@ -21,7 +21,7 @@ const HomeScreen = (props) => {
     }])
 
     const checkMyInvites = () => {
-        fetch("http://10.251.150.101:3000/invites", {
+        fetch("http://10.0.0.185:3000/invites", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -40,7 +40,7 @@ const HomeScreen = (props) => {
     }
 
     const checkVaccStatus = () => {
-        fetch("http://10.251.150.101:3000/checkvacc", {
+        fetch("http://10.0.0.185:3000/checkvacc", {
             method: "POST",
             headers:{
                 'Content-Type' : 'application/json'
@@ -70,7 +70,7 @@ const HomeScreen = (props) => {
             alert("Must be vaccinated!")
         }
         else {
-        fetch("http://10.251.150.101:3000/rsvp", {
+        fetch("http://10.0.0.185:3000/rsvp", {
         method: "POST",
         headers:{
             'Content-Type' : 'application/json'
@@ -113,6 +113,10 @@ const HomeScreen = (props) => {
         navigation.navigate('CreateEvent', {username:username})
     }
 
+    const onChartPress = () => {
+        navigation.navigate('ChartScreen')
+    }
+
 
     return (
         <SafeAreaView style={styles.root}>
@@ -120,6 +124,7 @@ const HomeScreen = (props) => {
             <AppBar onPress={onProfilePress} />
             <Text style={{alignSelf:'center'}}>Hello {props.route.params.username}</Text>
             <CustomButton text="Create Event" disabled={false} onPress={onCreateEventPress}></CustomButton>
+            <CustomButton text="See COVID Stats" disabled={false} onPress={onChartPress}></CustomButton>
             <CustomButton text="Logout" type ="SECONDARY" disabled={false} onPress={onLogOutPress}></CustomButton>
             <Text style={styles.header1}>My Invites</Text>
             <View style={{padding: 15}}>

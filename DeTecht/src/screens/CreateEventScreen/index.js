@@ -1,2 +1,1 @@
-export { default }
-from './CreateEventScreen';
+export { default } from './CreateEventScreen';
