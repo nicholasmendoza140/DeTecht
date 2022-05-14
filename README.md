@@ -35,4 +35,3 @@ On a command line window, in the project directory, run:
 
 
 
-<img width="1058" alt="Screen Shot 2022-05-13 at 9 00 02 PM" src="https://user-images.githubusercontent.com/60484062/168409983-92f1a3e8-b634-41ae-8fe4-40e16783cab5.png">
